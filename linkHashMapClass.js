@@ -1,3 +1,5 @@
+const LinkedList = require('./linkedlist');
+
 class HashMap {
   constructor(initialCapacity=8) {
     this.length = 0;
@@ -12,7 +14,7 @@ class HashMap {
       //   throw new Error('Key error');
       return undefined;
     }
-    return this._slots[index].value;
+    return this._slots[index].find(key);
   }
   
   set(key, value) {
@@ -23,18 +25,19 @@ class HashMap {
   
     const index = this._findSlot(key);
     if (this._slots[index] === undefined) {
-      this._slots[index] = {
+      this._slots[index] = new LinkedList();
+      this._slots[index].insertFirst({
         key,
         value,
-        deleted: false
-      };
+        deleted: false});
       this.length++;
     } else {
-      this._slots[index] = {
+      this._slots[index].insertLast({
         key,
         value,
         deleted: false
-      };
+      });
+      this.length++;
     }
   }
   
@@ -44,22 +47,15 @@ class HashMap {
     if (slot === undefined) {
       throw new Error('Key error');
     }
-    slot.deleted = true;
+    slot.remove(key);
     this.length--;
     this._deleted++;
   }
   
   _findSlot(key) {
     const hash = HashMap._hashString(key); //hash the key
-    const start = hash % this._capacity; //modulo the hash number to find a slot
-  
-    for (let i=start; i<start + this._capacity; i++) {
-      const index = i % this._capacity;
-      const slot = this._slots[index];
-      if (slot === undefined || (slot.key === key && !slot.deleted)) {//override if key is the same
-        return index;
-      }
-    }
+    const index = hash % this._capacity; //modulo the hash number to find a slot
+    return index;
   }
   
   _resize(size) {
@@ -78,6 +74,7 @@ class HashMap {
   }
   
   static _hashString(string) {
+    
     let hash = 5381;
     for (let i=0; i<string.length; i++) {
       hash = (hash << 5) + hash + string.charCodeAt(i);

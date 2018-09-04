@@ -1,22 +1,28 @@
-const HashMap = require('./hashMapClass');
+const HashMap = require('./linkHashMapClass');
 
 const lor = new HashMap();
 
-lor.set('Hobbit', 'Bilbo');
-lor.set('Hobbit', 'Frodo');
-lor.set('Wizard', 'Gandolf');
-lor.set('Human', 'Aragon');
-lor.set('Elf', 'Legolas');
-lor.set('Maiar', 'The Necromancer');
-lor.set('Maiar', 'Sauron');
-lor.set('RingBearer', 'Gollum');
-lor.set('LadyOfLight', 'Galadriel');
+// lor.set('Hobbit', 'Bilbo');
+// lor.set('Hobbit', 'Frodo');
+// lor.set('Wizard', 'Gandolf');
+// lor.set('Human', 'Aragon');
+// lor.set('Elf', 'Legolas');
+// lor.set('Maiar', 'The Necromancer');
+// lor.set('Maiar', 'Sauron');
+// lor.set('RingBearer', 'Gollum');
+// lor.set('LadyOfLight', 'Galadriel');
 lor.set('HalfElven', 'Arwen');
 lor.set('Ent', 'Treebeard');
 
+lor.set('drop7', 'gregg');
+lor.set('kidney', 'david');
+// console.log(lor.get('drop7'));
+lor.remove('drop7')
+// console.log(lor)
+// console.log(lor);
 // lor.get('Hobbit');
 // console.log(lor.get('Maiar')); //Sauron
-// console.log(lor);
+console.log(JSON.stringify(lor, null, 2));
 
 
 //Our solution that works most of the times =))
@@ -91,4 +97,4 @@ array.forEach(word => { //each word ex "east"
 return Array.from(anagrams.values()); //change hashmap values into an array
 }
 
-console.log(groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']));
+// console.log(groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']));
