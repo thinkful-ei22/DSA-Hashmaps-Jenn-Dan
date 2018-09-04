@@ -21,12 +21,20 @@ class HashMap {
     }
 
     const index = this._findSlot(key);
-    this._slots[index] = {
-      key,
-      value,
-      deleted: false
-    };
-    this.length++;
+    if (this._slots[index] === undefined) {
+      this._slots[index] = {
+        key,
+        value,
+        deleted: false
+      };
+      this.length++;
+    } else {
+      this._slots[index] = {
+        key,
+        value,
+        deleted: false
+      };
+    }
   }
 
   remove(key) {
