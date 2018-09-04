@@ -28,17 +28,11 @@ function checkPalindrome(string){
   }
   // console.log(Object.keys(palindrome).length);
   if (string.length % 2 === 0 && palindrome.length === string.length / 2){
-    console.log(string.length);
-    console.log(palindrome.length);
     return true;
   }
   else if (string.length % 2 === 1 && palindrome.length === Math.floor(string.length / 2) + 1){
-    console.log(string.length);
-    console.log(palindrome.length);
     return true;
   } else {
-    console.log(string.length);
-    console.log(palindrome.length);
     return false;
   }
 }
@@ -70,4 +64,31 @@ function checkPalindrome(string){
     }
 }
 
-console.log((checkPalindrome('acecarr'))); 
+// console.log((checkPalindrome('acecarr'))); 
+
+// function groupAnagrams(array){
+// let anagrams = new HashMap();
+// let ret = [];
+// for(let word of array){
+//     let key = word.split('').sort().join('');
+//     if(anagrams.get(key)){
+//         anagrams.get(key).push(word);
+//     }
+//     else {
+//         ret.push(anagrams.set(key, [word]));
+//     }
+// }
+// return ret;
+// }
+
+function groupAnagrams(array){
+let anagrams = new Map();
+array.forEach(word => { //each word ex "east"
+    const key = word.split('').sort().join(''); //split and sorted if its an anagram it will be the same ex "aest"
+    const anagram = anagrams.get(key)||[]; //find a value at the key that's the split word, if no value, put empty array 
+    anagrams.set(key, [...anagram, word]); //save the key in the hash map with each word in it
+})
+return Array.from(anagrams.values()); //change hashmap values into an array
+}
+
+console.log(groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']));
